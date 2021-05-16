@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Hello AdminPostsController!
+                
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+
+        {% for message in app.flashes('success') %}
+
+            <div class="alert alert-success">
+                {{ message }}
+
+            </div>
+        {% endfor %}
+        {% for post in posts %}
+
+            {{ post.title }}
+            {{ post.content }}
+            <a href="{{ path('admin.post.edit', {id: post.id}) }}">
+                <button class="btn btn-secondary">
+                    Editer
+                                                                                
+                                                        
+                                    
+                </button>
+            </a>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
