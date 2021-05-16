@@ -2,35 +2,44 @@
 
 {% block title %}
     Hello AdminPostsController!
-                
+        
+        
+    
 {% endblock %}
 
 {% block body %}
+<p>
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}</p>
 
-    <div class="container mt-4">
+    <div class="container d-flex justify-content-between mt-4">
+       
+        <div class="row">
+            {% for post in posts %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="img/images.jpg" alt="Card image cap">
 
-        {% for message in app.flashes('success') %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ post.title }}
+                            </h5>
+                            <p class="card-text">
+                                {{ post.content }}
+                            </p>
+                            <button class="btn btn-secondary">
+                                <a href="{{ path('admin.post.edit', {id: post.id}) }}" style="color:#FFF;">
+                                    Editer                                
+                                                                        
+                                </a>
+                            </button>
+                        </div>
+                </div>
 
-            <div class="alert alert-success">
-                {{ message }}
-
-            </div>
-        {% endfor %}
-        {% for post in posts %}
-
-            {{ post.title }}
-            {{ post.content }}
-            <a href="{{ path('admin.post.edit', {id: post.id}) }}">
-                <button class="btn btn-secondary">
-                    Editer
-                                                                                
-                                                        
-                                    
-                </button>
-            </a>
-
-        {% endfor %}
-
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
