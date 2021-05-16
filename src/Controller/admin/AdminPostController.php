@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminPostController extends AbstractController
@@ -46,7 +47,7 @@ class AdminPostController extends AbstractController
     
     /**
      * edit
-     * @Route("/admin/post/{id}", name="admin.post.edit")
+     * @Route("/admin/post/{id}", name="admin.post.edit", methods="GET|POST")
      * @param  mixed $post
      * @param  mixed $request
      * @return Response
@@ -65,5 +66,21 @@ class AdminPostController extends AbstractController
             'form' => $form->createView(),
             'post' => $post,
         ]);
+    }
+    
+    /**
+     * delete
+     * @Route("/admin/post/{id}", name="admin.post.delete", methods="DELETE")
+     * @param  Post $post
+     */
+    public function delete(Post $post, Request $request): Response {
+        $submittedToken = $request->get('_token');
+        if ($this->isCsrfTokenValid('delete' . $post->getId(), $submittedToken)) {
+            $this->em->remove($post);
+            $this->em->flush();
+            $this->addFlash('success', 'Bien supprimé avec succès');
+        }
+        return $this->redirectToRoute('posts');
+
     }
 }
