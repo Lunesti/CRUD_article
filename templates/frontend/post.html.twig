@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Hello AdminPostsController!
+
+
+{% endblock %}
+
+{% block body %}
+	<p>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+	</p>
+
+	<div class="container d-flex flex-column justify-content-between mt-4">
+
+
+		<div class="card">
+			<img class="card-img-top" src="../img/images.jpg" alt="Card image cap" style="width: 18rem;">
+
+			<div class="card-body">
+				<h5 class="card-title">
+					{{ post.title }}
+				</h5>
+				<p class="card-text">
+					{{ post.content }}
+				</p>
+			</div>
+		</div>
+
+		<h1 class="mt-4">Commentaires</h1>
+
+		{{form_start(form)}}
+        {{form_label(form.author)}}
+		{{form_widget(form.author, {'attr': {'class': 'form-control mb-4'}}) }}
+        {{form_label(form.comment) }}
+		{{form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+		<button class="btn btn-primary" >Envoyer</button>
+		{{form_end(form)}}
+
+	</div>
+{% endblock %}

@@ -29,6 +29,10 @@
 						<p class="card-text">
 							{{ post.content }}
 						</p>
+						<button class="btn btn-primary">
+							<a href="{{ path('post.show', {id: post.id, slug: post.slug}) }}" style="color:#FFF;">Lire la suite</a>
+
+						</button>
 						<button class="btn btn-secondary">
 							<a href="{{ path('admin.post.edit', {id: post.id}) }}" style="color:#FFF;">Editer</a>
 						</button>

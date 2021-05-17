@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Cocur\Slugify\Slugify;
 
 /**
- * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
-class Post
+class Comment
 {
     /**
      * @ORM\Id
@@ -19,29 +18,23 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=90)
      */
-    private $title;
+    private $author;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    private $comment;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
-    public function __construct()
+    public function __construct() 
     {
         $this->created_at = new \DateTime();
-    }
-
-    public function getSlug()
-    {
-        $slugify = new Slugify();
-        return $slugify->slugify($this->title);
     }
 
     public function getId(): ?int
@@ -49,26 +42,26 @@ class Post
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getAuthor(): ?string
     {
-        return $this->title;
+        return $this->author;
     }
 
-    public function setTitle(string $title): self
+    public function setAuthor(string $author): self
     {
-        $this->title = $title;
+        $this->author = $author;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getComment(): ?string
     {
-        return $this->content;
+        return $this->comment;
     }
 
-    public function setContent(string $content): self
+    public function setComment(string $comment): self
     {
-        $this->content = $content;
+        $this->comment = $comment;
 
         return $this;
     }

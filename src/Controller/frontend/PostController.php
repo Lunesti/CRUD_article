@@ -26,11 +26,13 @@ class PostController extends AbstractController
      * @Route("/posts", name="posts")
      * @return Response
      */
-    public function index(): Response
+    public function posts(): Response
     {
         $posts = $this->repository->findAll();
         return $this->render('frontend/index.html.twig', [
             'posts' => $posts,
         ]);
     }
+
+    
 }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Hello AdminPostsController!
+
+
+{% endblock %}
+
+{% block body %}
+
+	{{form_start(form)}}
+	{{form_widget(form.title)}}
+	{{form_widget(form.comment)}}
+	<div class="button btn btn-primary">Envoyer</div>
+	{{form_end(form)}}
+
+{% endblock %}
